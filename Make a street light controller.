@@ -1,0 +1,24 @@
+const int LDRPin = A0;  // ldr pin
+const int ledPin = 3;  // LED pin
+void setup() {
+  pinMode(LDRPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  // Read the analog value from the ldr
+  int lightLevel = analogRead(LDRPin);
+
+  // Check if it's dark (below the threshold) and turn on the street light
+  if(lightLevel>20)
+    analogWrite(ledPin,0);
+  else if(10<lightLevel<20)
+     analogWrite(ledPin,150);
+  else if(0<lightLevel<10)
+     analogWrite(ledPin,255);
+  
+  Serial.print("LDR Value: ");
+  Serial.println(lightLevel);
+  delay(500);
+}
