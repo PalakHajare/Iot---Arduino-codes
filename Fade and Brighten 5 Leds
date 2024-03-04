@@ -1,0 +1,40 @@
+// Defining the pins for the 5 LEDs
+const int ledPins[] = {3, 5, 6, 9, 10};  
+const int Ledsnum = 5;
+
+void setup() {
+  // Setting all LED pins as outputs
+  for (int i = 0; i < Ledsnum; i++) {
+    pinMode(ledPins[i], OUTPUT);
+  }
+}
+
+void loop() {
+  // Fade in and out each LED one by one
+  for (int i = 0; i < Ledsnum; i++) {
+    fadeLedIn(ledPins[i]);
+    delay(500); // Adjusting the delay
+    fadeLedOut(ledPins[i]);
+    delay(500); // Adjusting the delay
+  }
+}
+
+
+
+void fadeLedIn(int pin) {
+  // Fade in the LED
+  for (int brightness = 0; brightness <= 255; brightness++) {
+    analogWrite(pin, brightness);
+    delay(5); // Adjusting the delay
+  }
+}
+
+void fadeLedOut(int pin) {
+  // Fade out the LED
+  for (int brightness = 255; brightness >= 0; brightness--) {
+    analogWrite(pin, brightness);
+    delay(5); // Adjusting the delay for smooth fading
+  }
+  // Turning off the LED after fading out
+  digitalWrite(pin, LOW);
+}
