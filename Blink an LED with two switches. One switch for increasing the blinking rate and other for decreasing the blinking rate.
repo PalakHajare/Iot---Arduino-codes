@@ -1,0 +1,33 @@
+const int ledPin = 2;
+const int increaseSwitchPin = 3;
+const int decreaseSwitchPin = 4;
+
+int Interval = 1000; 
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(increaseSwitchPin, INPUT_PULLUP);
+  pinMode(decreaseSwitchPin, INPUT_PULLUP);
+}
+
+void loop() {
+  if (digitalRead(increaseSwitchPin) == LOW) {
+    increaseBlinkInterval();
+  }
+
+  if (digitalRead(decreaseSwitchPin) == LOW) {
+    decreaseBlinkInterval();
+  }
+
+  digitalWrite(ledPin, HIGH);
+  delay(Interval);
+  digitalWrite(ledPin, LOW);
+  delay(Interval);
+}
+
+void increaseBlinkInterval() {
+  Interval = max(50, Interval - 50); 
+}
+
+void decreaseBlinkInterval() {
+  Interval = min(2000, Interval + 50); 
+}
