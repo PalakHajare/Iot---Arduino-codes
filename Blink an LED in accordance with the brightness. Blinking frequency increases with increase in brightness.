@@ -1,0 +1,25 @@
+const int ledPin = 3;      
+const int ldrPin = A0;  
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int lightLevel = analogRead(ldrPin);
+  
+  int Interval = map(lightLevel, 0, 1023, 100, 1000);
+
+  digitalWrite(ledPin, HIGH); 
+  delay(Interval);
+
+  digitalWrite(ledPin, LOW);  
+  delay(Interval);
+  
+  Serial.print("Light Level: ");
+  Serial.print(lightLevel);
+  Serial.print("\tBlinking Frequency: ");
+  Serial.print(1000 / Interval); 
+  Serial.println(" Hz");
+}
